@@ -56,9 +56,9 @@
             })(document, window);
 ```
 上面代码做了
-    1. 获取设备dpr(即手机分辨率/device-widht);
-    2. 算出缩放比例 scale = 1/dpr;
-    3. 创建meta 并将scale赋予initial-scale，maximum-scale;
-    4. 插入文档
-    5. 获取手机真实宽度，以750宽度100px为基准，算出其他屏幕宽度的基准font-size
-    6. 监听屏幕变化，响应
+1. 获取设备dpr(即手机分辨率/device-widht);
+2. 算出缩放比例 scale = 1/dpr;
+3. 创建meta 并将scale赋予initial-scale，maximum-scale;
+4. 插入文档
+5. 获取手机真实宽度，以750宽度100px为基准，算出其他屏幕宽度的基准font-size
+6. 监听屏幕变化，响应
