@@ -71,3 +71,6 @@
     @return $px*750/$designWidth/100 + rem; }
 $designWidth : 750; 
 ```
+
+5.flex布局
+微信支持不好，微信支持不好，微信支持不好，除此之外都不错
