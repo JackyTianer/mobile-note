@@ -18,8 +18,47 @@
     
 2. 设置 width=640, 设置缩放比例为0.5,一般视觉稿给的图像宽度都为640,使用这种方式的好处就是可以完全的使用px来布局，间距，宽高可以很好的适应，不过带来的问题就是在iphone6以上以及android机中device-width不是320造成的间距问题，这时候可以动态计算缩放比例来解决。
 
-3. rem布局
-
-```javascript
+3. rem布局, 字体宽度等使用rem来布局，因为方便计算并且又满足chrome字体最小值12px的要求，将html的font-size设置成100px,根据视觉稿将px转换成rem来布局，并且，可以通过媒体查询设置不同device-width宽度的跟字体大小值，如，视觉稿是640宽度，你要兼容iphone6的宽度的话， 使用 (375 * 2) * 100/640 计算即将device-width宽度为375的机型设置rem为117.1875
+缺点也很明显
+    - 对茫茫多的android机型难以做到完全兼容，奇葩宽度在android会出现
+    - 视觉如果将常用设计宽度更改了的话，不能统一用一个根font-size
     
+4. 动态rem布局,参考淘宝主页， 使用动态计算rem的方式，实时改变 html的font-size，并且通过dpr来动态改变缩放比例
+```javascript
+    (function (doc, win) {
+              var docEle = doc.documentElement,
+                  isIos = navigator.userAgent.match(/iphone|ipod|ipad/gi),
+                  dpr=Math.min(win.devicePixelRatio, 3);
+                  scale = 1 / dpr,
+    
+                  resizeEvent = 'orientationchange' in window ? 'orientationchange' : 'resize';
+    
+              docEle.dataset.dpr = dpr;
+    
+              var metaEle = doc.createElement('meta');
+              metaEle.name = 'viewport';
+              metaEle.content = 'initial-scale=' + scale + ',maximum-scale=' + scale;
+              docEle.firstElementChild.appendChild(metaEle);
+              
+    
+              var recalCulate = function () {
+                      var width = docEle.clientWidth;
+                      if (width / dpr > 640) {
+                          width = 640 * dpr;
+                       }
+                    docEle.style.fontSize = 100 * (width / 750) + 'px';
+                };
+    
+              recalCulate()
+    
+              if (!doc.addEventListener) return;
+              win.addEventListener(resizeEvent, recalCulate, false);
+            })(document, window);
 ```
+上面代码做了
+    1. 获取设备dpr(即手机分辨率/device-widht);
+    2. 算出缩放比例 scale = 1/dpr;
+    3. 创建meta 并将scale赋予initial-scale，maximum-scale;
+    4. 插入文档
+    5. 获取手机真实宽度，以750宽度100px为基准，算出其他屏幕宽度的基准font-size
+    6. 监听屏幕变化，响应
