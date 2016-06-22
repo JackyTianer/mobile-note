@@ -85,3 +85,49 @@ $designWidth : 750;
 - 使用*translate*等函数比使用top，bottom等做动画性能高的多，避免元素所属层重绘。
 - 如必须改变dom结构的时候,可以先*display:none*脱离文档流,改变完成后再*display:block/inline/inline-block*回来,这样性能较高
 - 微信下载，除了接入应用宝（接入应用宝后的也只有一个很小的按钮用于在微信浏览器下载），否则无法再微信浏览器下载。
+- 由于手机屏幕的dpi大多数是2或3,视觉为了兼顾这些,给出的视觉稿多为2倍图,这样,如果简单的使用compass生成雪碧图,会导致页面的图片为视觉效果的两倍,这时候可以使用mixin解决
+```sass
+
+@import "compass/css3";
+/**
+* param :
+*  name:图片名
+*  标准图位置
+*  retina图位置
+*/
+@mixin retina-sprite-background($name,$normal,$retina){
+  background-repeat: no-repeat;
+  background-image: sprite-url($normal);
+  background-position: sprite-position($normal,$name);
+  height:image-height(sprite-file($normal, $name));
+  width: image-width(sprite-file($normal, $name));
+
+  // Media Query for retina
+  @media (min--moz-device-pixel-ratio: 1.3),
+  (-o-min-device-pixel-ratio: 2.6/2),
+  (-webkit-min-device-pixel-ratio: 1.3),
+  (min-device-pixel-ratio: 1.3),
+  (min-resolution: 1.3dppx) {
+
+    background-image: sprite-url($retina);
+    background-position: 0 round(nth(sprite-position($retina, $name), 2) / 2);
+    height:round(image-height(sprite-file($retina, $name)) / 2);
+    width: round(image-width(sprite-file($retina, $name)) /2 );
+
+    // treat the @2x retina sprite sheet as 50% wide for double resolution upon display
+    $double-width:ceil(image-width(sprite-path($retina)) / 2);
+    $auto-height:auto;
+    @include background-size($double-width $auto-height);
+  }
+}
+//调用方式
+//1：首先定义雪碧图和retina雪碧图，设置spacing和layout
+$sprites: sprite-map("mobile/specials/matholym/icon/*.png",  $spacing: 10px, $layout: vertical);
+$sprites-retina: sprite-map("mobile/specials/matholym/icon@2x/*.png",  $spacing: 10px, $layout: vertical);
+// 使用mixin
+.icon-mode-video {
+  @include retina-sprite-background(mode_video, $sprites, $sprites-retina);
+}
+
+
+```
