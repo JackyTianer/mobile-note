@@ -124,7 +124,7 @@ $designWidth : 750;
 //1：首先定义雪碧图和retina雪碧图，设置spacing和layout
 $sprites: sprite-map("mobile/specials/matholym/icon/*.png",  $spacing: 10px, $layout: vertical);
 $sprites-retina: sprite-map("mobile/specials/matholym/icon@2x/*.png",  $spacing: 10px, $layout: vertical);
-// 使用mixin
+//2. 使用mixin
 .icon-mode-video {
   @include retina-sprite-background(mode_video, $sprites, $sprites-retina);
 }
