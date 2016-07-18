@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-cmn-Hans">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="flexbox.css"/>
+</head>
+<body>
+<div style="border: 1px solid red">
+    <h2>justify-content测试 direction:row</h2>
+    <div class="box-row" style="justify-content: flex-start">
+        <div class="item-1 bgc-b"></div>
+        <div class="item-2 bgc-y"></div>
+        <div class="item-3 bgc-g"></div>
+    </div>
+
+    <div class="box-row" style="justify-content: flex-end">
+        <div class="width-100 bgc-g"></div>
+        <div class="width-300 bgc-y"></div>
+        <div class="width-200 bgc-b"></div>
+    </div>
+    <div class="box-row" style="justify-content: center">
+        <div class="width-100 bgc-b"></div>
+        <div class="width-300 bgc-r"></div>
+        <div class="width-200 bgc-g"></div>
+    </div>
+    <div class="box-row" style="justify-content: space-between">
+        <div class="width-100 bgc-b"></div>
+        <div class="width-300 bgc-y"></div>
+        <div class="width-200 bgc-g"></div>
+    </div>
+
+    <div class="box-row" style="justify-content: space-around">
+        <div class="width-100 bgc-r"></div>
+        <div class="width-300 bgc-g"></div>
+        <div class="width-200 bgc-b"></div>
+    </div>
+</div>
+
+<div style="margin-top: 20px"></div>
+<div style="border: 1px solid red">
+    <h2>align-content测试 direction:row</h2>
+    <div class="box-row" style="align-items: flex-start;border: 1px solid green">
+        <div class="item-1 bgc-b height-50"></div>
+        <div class="item-2 bgc-y height-50"></div>
+        <div class="item-3 bgc-g height-50"></div>
+    </div>
+
+    <div class="box-row" style="align-items: flex-end;border: 1px solid gold">
+        <div class="width-100 bgc-g height-50"></div>
+        <div class="width-300 bgc-y height-50"></div>
+        <div class="width-200 bgc-b height-50"></div>
+    </div>
+    <div class="box-row" style="align-items: center;border: 1px solid aqua">
+        <div class="width-100 bgc-b height-50"></div>
+        <div class="width-300 bgc-r height-50"></div>
+        <div class="width-200 bgc-g height-50"></div>
+    </div>
+    <div class="box-row" style="align-items: baseline;border: 1px solid wheat">
+        <div class="width-100 bgc-b height-50" style="line-height: 50px">
+            style="line-height: 50px"
+        </div>
+        <div class="width-300 bgc-y height-50" style="line-height: 30px">style="line-height: 30px"</div>
+        <div class="width-200 bgc-g height-50" style="line-height: 40px">style="line-height: 40px"</div>
+    </div>
+
+    <div class="box-row" style="align-items: stretch;border: 1px solid black">
+        <div class="width-100 bgc-r"></div>
+        <div class="width-300 bgc-g "></div>
+        <div class="width-200 bgc-b height-50"></div>
+    </div>
+</div>
+
+<div style="margin-top: 20px"></div>
+<div style="border: 1px solid red">
+    <h2>order测试</h2>
+    <div class="box-row" style="align-items: flex-start;border: 1px solid green">
+        <div class="item-1 bgc-b height-50" style="order: 2">order2</div>
+        <div class="item-2 bgc-y height-50" style="order: 0">order0</div>
+        <div class="item-3 bgc-g height-50" style="order: 3">order3</div>
+    </div>
+</div>
+
+<div style="margin-top: 20px"></div>
+<div style="border: 1px solid red">
+    <h2>align-self测试</h2>
+    <div class="box-row" style="align-items: flex-start;border: 1px solid green">
+        <div class="item-1 bgc-b" style="align-self: flex-start">flex-start</div>
+        <div class="item-2 bgc-y" style="align-self: flex-end">flex-end</div>
+        <div class="item-3 bgc-g" style="align-self: center">center</div>
+        <div class="item-2 bgc-r " style="align-self: stretch">stretch</div>
+    </div>
+</div>
+
+</body>
+</html>
